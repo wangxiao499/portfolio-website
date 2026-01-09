@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人简历作品集 | 王何心</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- 鼠标拖尾效果 -->
+<div class="mouse-trail" id="mouseTrail"></div>
+
+<!-- 视频播放模态框 -->
+<div class="video-modal" id="videoModal">
+  <div class="video-modal-content">
+    <button class="video-close" id="videoClose">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="video-container">
+      <video id="modalVideo" controls>
+        <source src="" type="video/mp4">
+        您的浏览器不支持视频播放
+      </video>
+    </div>
+    <div class="video-info">
+      <h3 id="videoTitle"></h3>
+      <p id="videoDescription"></p>
+    </div>
+  </div>
+</div>
+<!-- 背景音乐控制 -->
+<div class="music-player" id="musicPlayer">
+  <audio id="backgroundMusic" loop>
+    <source src="assets/music/background.mp3" type="audio/mpeg">
+    您的浏览器不支持音频元素
+  </audio>
+  <button class="music-toggle" id="musicToggle">
+    <i class="fas fa-volume-up"></i>
+    <i class="fas fa-volume-mute" style="display: none;"></i>
+  </button>
+  <div class="music-info">
+    <span class="music-title">背景音乐</span>
+    <div class="volume-control">
+      <input type="range" id="volumeSlider" min="0" max="100" value="50">
+    </div>
+  </div>
+</div>
+<!-- 导航栏 -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#home" class="logo">Portfolio</a>
+    <ul class="nav-menu">
+      <li><a href="#home">首页</a></li>
+      <li><a href="#about">关于我</a></li>
+<!--      <li><a href="#skills">技能</a></li>-->
+      <li><a href="#projects">项目</a></li>
+<!--      <li><a href="#experience">经历</a></li>-->
+      <li><a href="#contact">联系</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- 首页区域 -->
+<section id="home" class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="animate-text">你好，我是 <span class="highlight">王何心</span></h1>
+      <p class="subtitle">游戏设计师 & 前端开发者</p>
+      <p class="description">专注于创造引人入胜的数字体验，将创意与技术完美融合</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">查看作品</a>
+        <a href="#contact" class="btn btn-secondary">联系我</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="image-container">
+        <!-- 这里放置你的头像或代表图 -->
+        <div class="avatar-placeholder">
+          <i class="fas fa-user-circle"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#about" class="scroll-down">
+    <i class="fas fa-chevron-down"></i>
+  </a>
+</section>
+
+<!-- 关于我 -->
+<section id="about" class="section">
+  <div class="container">
+    <h2 class="section-title">关于我</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <h3>热情、创新、追求卓越</h3>
+        <p>我是一名充满热情的游戏制作师和前端开发者，我致力于通过技术创造令人难忘的用户体验。</p>
+        <p>作为一名技术美术融合的创意开发者，我拥有从用户体验设计到游戏开发的全栈能力。在前端领域，我专注于构建既美观又功能完备的响应式界面，并通过交互动画增强用户的情感连接；在游戏开发方面，我擅长运用Unity与Unreal Engine，能够实现从核心玩法到视觉表现的全流程制作。我相信，优秀的设计源于美学、功能与技术的深度结合，无论是网页、游戏还是桌面应用，我都致力于创造兼具沉浸感与可用性的数字体验。</p>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">邮箱:</span>
+            <span class="info-value">2044825859@qq.com</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">电话:</span>
+            <span class="info-value">13036494131</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">地址:</span>
+            <span class="info-value">四川宜宾</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number" data-count="7">0</div>
+          <div class="stat-label">完成项目</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-count="5">0</div>
+          <div class="stat-label">奖项荣誉</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--&lt;!&ndash; 技能部分 &ndash;&gt;-->
+<!--<section id="skills" class="section bg-light">-->
+<!--  <div class="container">-->
+<!--    <h2 class="section-title">专业技能</h2>-->
+<!--    <div class="skills-container">-->
+<!--      <div class="skill-category">-->
+<!--        <h3><i class="fas fa-code"></i> 技术技能</h3>-->
+<!--        <div class="skill-list">-->
+<!--          <div class="skill-item">-->
+<!--            <div class="skill-info">-->
+<!--              <span>HTML5 / CSS3</span>-->
+<!--              <span>95%</span>-->
+<!--            </div>-->
+<!--            <div class="skill-bar">-->
+<!--              <div class="skill-progress" data-width="95"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="skill-item">-->
+<!--            <div class="skill-info">-->
+<!--              <span>JavaScript / ES6+</span>-->
+<!--              <span>90%</span>-->
+<!--            </div>-->
+<!--            <div class="skill-bar">-->
+<!--              <div class="skill-progress" data-width="90"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="skill-item">-->
+<!--            <div class="skill-info">-->
+<!--              <span>React / Vue.js</span>-->
+<!--              <span>85%</span>-->
+<!--            </div>-->
+<!--            <div class="skill-bar">-->
+<!--              <div class="skill-progress" data-width="85"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="skill-category">-->
+<!--        <h3><i class="fas fa-paint-brush"></i> 设计技能</h3>-->
+<!--        <div class="skill-list">-->
+<!--          <div class="skill-item">-->
+<!--            <div class="skill-info">-->
+<!--              <span>UI/UX 设计</span>-->
+<!--              <span>88%</span>-->
+<!--            </div>-->
+<!--            <div class="skill-bar">-->
+<!--              <div class="skill-progress" data-width="88"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="skill-item">-->
+<!--            <div class="skill-info">-->
+<!--              <span>交互设计</span>-->
+<!--              <span>90%</span>-->
+<!--            </div>-->
+<!--            <div class="skill-bar">-->
+<!--              <div class="skill-progress" data-width="90"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="skill-item">-->
+<!--            <div class="skill-info">-->
+<!--              <span>Figma / Adobe XD</span>-->
+<!--              <span>85%</span>-->
+<!--            </div>-->
+<!--            <div class="skill-bar">-->
+<!--              <div class="skill-progress" data-width="85"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+<!-- 项目展示 -->
+<section id="projects" class="section">
+  <div class="container">
+    <h2 class="section-title">精选项目</h2>
+    <div class="projects-filter">
+      <button class="filter-btn active" data-filter="all">全部</button>
+      <button class="filter-btn" data-filter="web">网页设计</button>
+      <button class="filter-btn" data-filter="app">桌面应用</button>
+      <button class="filter-btn" data-filter="game">游戏</button>
+    </div>
+    <div class="projects-grid">
+      <!-- 项目卡片 1 -->
+      <div class="project-card" data-category="game">
+        <div class="project-image">
+          <img src="assets/images/project1/image.png" alt="海岛疾风" class="project-img" onerror="this.style.display='none'; this.parentElement.classList.add('image-placeholder')">
+          <div class="project-overlay">
+            <button class="view-project" data-video="assets/videos/project1/video1.mp4" data-title="跑酷演示" data-description="享受刺激的跑酷旅程">
+              <i class="fas fa-play-circle"></i> 播放演示
+            </button>
+            <a href="project-detail.html?project=project01" class="view-details">查看详情</a>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">unreal</span>
+            <span class="project-tag">人物操纵</span>
+          </div>
+          <h3>海岛疾风</h3>
+          <p>采用虚幻5引擎制作的3D海岛闯关跑酷游戏，享受一场属于你的刺激吧！</p>
+          <div class="project-media-badge">
+            <i class="fas fa-video"></i> 提供演示视频
+          </div>
+        </div>
+      </div>
+
+      <!-- 项目卡片 2 -->
+      <div class="project-card" data-category="game">  <!-- 这里修正了 -->
+        <div class="project-image">
+          <img src="assets/images/project2/image.png" alt="都市狂袭" class="project-img" onerror="this.style.display='none'; this.parentElement.classList.add('image-placeholder')">
+          <div class="project-overlay">
+            <button class="view-project" data-video="assets/videos/project2/video1.mp4" data-title="都市狂袭演示" data-description="unity制作的追逃游戏">
+              <i class="fas fa-play-circle"></i> 播放演示
+            </button>
+            <a href="project-detail.html?project=project02" class="view-details">查看详情</a>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">unity</span>
+            <span class="project-tag">追逃游戏</span>
+          </div>
+          <h3>都市狂袭</h3>
+          <p>在被血染红的美丽都市中，与无穷无尽的生化追兵进行一场惊心动魄的追逃游戏吧！</p>
+          <div class="project-media-badge">
+            <i class="fas fa-video"></i> 提供演示视频
+          </div>
+        </div>
+      </div>
+
+      <!-- 项目卡片 3 -->
+      <div class="project-card" data-category="app">
+        <div class="project-image">
+          <img src="assets/images/project3/image.png" alt="基于YOLOv11的猫品种检测器" class="project-img" onerror="this.style.display='none'; this.parentElement.classList.add('image-placeholder')">
+          <div class="project-overlay">
+            <button class="view-project" data-video="assets/videos/project3/video1.mp4" data-title="3D产品交互演示" data-description="使用Three.js实现的3D产品展示交互效果">
+              <i class="fas fa-play-circle"></i> 播放演示
+            </button>
+            <a href="project-detail.html?project=project03" class="view-details">查看详情</a>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">深度学习</span>
+            <span class="project-tag">目标检测</span>
+          </div>
+          <h3>基于YOLO11的猫品种检测器</h3>
+          <p>结合多种架构，于24类猫品种数据集上进行了训练与优化的YOLOv11检测器</p>
+          <div class="project-media-badge">
+            <i class="fas fa-video"></i> 提供演示视频
+          </div>
+        </div>
+      </div>
+
+      <!-- 项目卡片 4 -->
+      <div class="project-card" data-category="web">
+        <div class="project-image">
+          <img src="assets/images/project4/image.png" alt="人事管理系统" class="project-img" onerror="this.style.display='none'; this.parentElement.classList.add('image-placeholder')">
+          <!-- 已移除视频演示按钮 -->
+          <!-- <div class="project-overlay">
+            <button class="view-project" data-video="assets/videos/project4/video1.mp4" data-title="视频演示" data-description="视频效果展示">
+              <i class="fas fa-play-circle"></i> 播放演示
+            </button>
+            <a href="project-detail.html?project=project04" class="view-details">查看详情</a>
+          </div> -->
+          <div class="project-overlay">
+            <!-- 独立的查看详情按钮 -->
+            <a href="project-detail.html?project=project04" class="view-details">
+              <i class="fas fa-info-circle"></i> 查看详情
+            </a>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">数据可视化</span>
+            <span class="project-tag">SSM架构</span>
+          </div>
+          <h3>人事管理系统</h3>
+          <p>本项目致力于研发一套智能化、模块化的人事管理系统</p>
+          <!-- 已移除视频演示徽章 -->
+          <!-- <div class="project-media-badge">
+            <i class="fas fa-video"></i> 提供演示视频
+          </div> -->
+        </div>
+      </div>
+
+      <!-- 项目卡片 5 -->
+      <div class="project-card" data-category="app">
+        <div class="project-image">
+          <img src="assets/images/project5/image.png" alt="AIGC" class="project-img" onerror="this.style.display='none'; this.parentElement.classList.add('image-placeholder')">
+          <div class="project-overlay">
+            <button class="view-project" data-video="assets/videos/project5/video1.mp4" data-title="aigc视频演示" data-description="全视频展示">
+              <i class="fas fa-play-circle"></i> 播放演示
+            </button>
+            <a href="project-detail.html?project=project05" class="view-details">查看详情</a>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">AIGC</span>
+            <span class="project-tag">视频生成</span>
+          </div>
+          <h3>The right path</h3>
+          <p>本视频利用AI生成，构建了一位行者不断前行，旅途不断变化的怪诞世界</p>
+          <div class="project-media-badge">
+            <i class="fas fa-video"></i> 提供演示视频
+          </div>
+        </div>
+      </div>
+
+      <!-- 项目卡片 6 -->
+      <div class="project-card" data-category="interactive">
+        <div class="project-image">
+          <img src="assets/images/project6/image.png" alt="个人作品集网站" class="project-img" onerror="this.style.display='none'; this.parentElement.classList.add('image-placeholder')">
+          <div class="project-overlay">
+            <button class="view-project" data-video="assets/videos/project6/video1.mp4" data-title="作品集网站交互演示" data-description="响应式作品集网站的动画和交互效果展示">
+              <i class="fas fa-play-circle"></i> 播放演示
+            </button>
+            <a href="project-detail.html?project=project06" class="view-details">查看详情</a>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">HTML5</span>
+            <span class="project-tag">CSS3</span>
+            <span class="project-tag">JavaScript</span>
+          </div>
+          <h3>个人作品集网站</h3>
+          <p>响应式个人作品集网站，展示项目作品和个人技能。</p>
+          <div class="project-media-badge">
+            <i class="fas fa-video"></i> 提供演示视频
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--&lt;!&ndash; 经历/教育 &ndash;&gt;-->
+<!--<section id="experience" class="section bg-light">-->
+<!--  <div class="container">-->
+<!--    <h2 class="section-title">经历与教育</h2>-->
+<!--    <div class="timeline">-->
+<!--      <div class="timeline-item">-->
+<!--        <div class="timeline-date">2022 - 至今</div>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3>交互媒体设计师</h3>-->
+<!--          <p class="company">创新科技公司</p>-->
+<!--          <p>负责公司产品的交互设计和用户体验优化，主导了多个重要项目的设计工作。</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="timeline-item">-->
+<!--        <div class="timeline-date">2020 - 2022</div>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3>前端开发工程师</h3>-->
+<!--          <p class="company">数字创意工作室</p>-->
+<!--          <p>参与多个企业级网站和Web应用开发，专注于响应式设计和性能优化。</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="timeline-item">-->
+<!--        <div class="timeline-date">2016 - 2020</div>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3>数字媒体技术学士</h3>-->
+<!--          <p class="company">某某大学</p>-->
+<!--          <p>主修数字媒体技术，学习了交互设计、计算机图形学和多媒体制作等课程。</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+<!-- 联系我 -->
+<section id="contact" class="section contact-section">
+  <div class="container">
+    <div class="contact-header">
+      <h2 class="section-title">联系我</h2>
+      <p class="section-subtitle">期待与您合作，共同创造卓越的数字体验</p>
+    </div>
+
+    <div class="contact-container">
+      <!-- 联系卡片 -->
+      <div class="contact-cards">
+        <div class="contact-card email-card">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-content">
+            <h3>邮箱</h3>
+            <p class="contact-info">2044825859@qq.com</p>
+            <a href="mailto:2044825859@qq.com" class="contact-btn">
+              发送邮件 <i class="fas fa-paper-plane"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-card phone-card">
+          <div class="contact-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="contact-content">
+            <h3>电话</h3>
+            <p class="contact-info">130 3649 4131</p>
+            <a href="tel:13036494131" class="contact-btn">
+              拨打电话 <i class="fas fa-phone"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 悬浮粒子效果 -->
+  <div class="floating-particles" id="contactParticles"></div>
+</section>
+
+<script>
+  // 创建悬浮粒子效果
+  function createParticles() {
+    const container = document.getElementById('contactParticles');
+    if (!container) return;
+
+    const particleCount = 20;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+
+      // 随机大小
+      const size = Math.random() * 10 + 5;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+
+      // 随机位置
+      particle.style.left = `${Math.random() * 100}%`;
+
+      // 随机颜色
+      const colors = [
+        'rgba(108, 99, 255, 0.3)',
+        'rgba(54, 209, 220, 0.3)',
+        'rgba(255, 101, 132, 0.3)'
+      ];
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+      // 随机动画延迟和持续时间
+      const delay = Math.random() * 15;
+      const duration = Math.random() * 10 + 15;
+      particle.style.animationDelay = `${delay}s`;
+      particle.style.animationDuration = `${duration}s`;
+
+      container.appendChild(particle);
+    }
+  }
+
+  // 页面加载完成后创建粒子
+  document.addEventListener('DOMContentLoaded', createParticles);
+</script>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <div class="footer-content">
+    <!-- 主要信息 -->
+    <div class="footer-main">
+      <div class="footer-brand">
+        <h3 class="footer-logo">Portfolio</h3>
+        <p class="footer-tagline">用代码创造美好，用设计传递价值</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="link-group">
+          <h4>快速导航</h4>
+          <a href="#home">首页</a>
+          <a href="#about">关于我</a>
+          <a href="#projects">作品展示</a>
+          <a href="#contact">联系我</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 版权和建造信息 -->
+    <div class="footer-bottom">
+      <div class="copyright">
+        <p>&copy; <span id="currentYear"></span> 王何心. 保留所有权利.</p>
+        <p>本作品集使用 <span class="tech-highlight">HTML5</span> · <span class="tech-highlight">CSS3</span> · <span class="tech-highlight">JavaScript</span> 构建</p>
+      </div>
+
+      <div class="footer-stats">
+        <div class="stat-item">
+          <i class="fas fa-heart"></i>
+          用心制作
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

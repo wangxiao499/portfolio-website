@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目详情 | 王何心作品集</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 详情页特有样式 */
+        .project-detail-container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+        }
+
+        .project-detail-header {
+            margin-bottom: 30px;
+        }
+
+        .project-detail-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .project-tag {
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary-color);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--gray-color);
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .project-gallery img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-gallery img:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .video-button-container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .video-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .video-button:hover {
+            background: #554fd8;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+        }
+
+        /* 视频模态框样式 */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .video-close:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: rotate(90deg);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            font-size: 1.4rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .project-gallery img {
+                height: 220px;
+            }
+
+            .project-detail-header h1 {
+                font-size: 2rem;
+            }
+
+            .video-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- 鼠标拖尾效果 -->
+<div class="mouse-trail" id="mouseTrail"></div>
+
+<!-- 导航栏 -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">Portfolio</a>
+        <ul class="nav-menu">
+            <li><a href="index.html#home">首页</a></li>
+            <li><a href="index.html#about">关于我</a></li>
+            <li><a href="index.html#projects">项目</a></li>
+            <li><a href="index.html#contact">联系</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- 项目详情内容 -->
+<div class="project-detail-container">
+    <a href="index.html#projects" class="back-button">
+        <i class="fas fa-arrow-left"></i> 返回项目列表
+    </a>
+
+    <!-- 项目详情将由JavaScript动态生成 -->
+    <div id="projectDetailContent">
+        <!-- 这里的内容会被JavaScript替换 -->
+        <div class="project-detail-header">
+            <h1>正在加载项目详情...</h1>
+        </div>
+    </div>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <h3 class="footer-logo">Portfolio</h3>
+                <p class="footer-tagline">用代码创造美好，用设计传递价值</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">
+                <p>&copy; <span id="currentYear"></span> 王何心. 保留所有权利.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- 引入主站JavaScript文件，确保鼠标效果正常工作 -->
+<script src="script.js"></script>
+
+<script>
+    // 项目数据
+    const projectsData = {
+        project01: {
+            title: "海岛疾风",
+            description: "本游戏基于虚幻5引擎开发，是一款3D海岛主题跑酷游戏。项目运用蓝图系统实现角色控制、关卡机制及UI交互；通过动画蓝图设计动态关卡；实现时间操控（暂停/减速）、重生系统、存档点、背包道具等核心功能。玩家需穿越地形障碍抵达终点，最终通过传送门进入天空平台完成挑战。",
+            images: [
+                "assets/images/project1/image1.png",
+                "assets/images/project1/image2.png",
+                "assets/images/project1/image3.png"
+            ],
+            tags: ["虚幻5", "3D跑酷"],
+            video: "assets/videos/project1/video1.mp4"
+        },
+
+        project02: {
+            title: "都市狂袭",
+            description: "本游戏是一款基于Unity引擎开发的第三人称3D追逃战斗游戏。玩家将在高度写实的现代都市中，扮演一名被神秘组织追杀的“逃亡者”，与AI控制的“猎杀者”小队成员，展开一场智慧、策略与反应力的终极博弈。游戏融合了战术对抗、环境互动，为玩家提供沉浸式的都市逃亡体验。",
+            images: [
+                "assets/images/project2/image1.png",
+                "assets/images/project2/image2.png",
+                "assets/images/project2/image3.png"
+            ],
+            tags: ["unity", "AI", "追逃对抗"],
+            video: "assets/videos/project2/video1.mp4"
+        },
+
+        project03: {
+            title: "基于YOLOv11的猫品种检测器",
+            description: "基于YOLOv11深度学习框架，设计并实现了一个高效的猫品种检测系统。针对猫品种识别任务中的小目标、类间相似度高、姿态多样等挑战，采用YOLOv11n模型架构，在24类猫品种数据集上进行了训练与优化。通过PyQt5框架开发了图形用户界面，实现了图片/视频/摄像头实时检测、批量处理、结果可视化等功能。该系统可为宠物医疗、动物收容所、宠物社交平台等场景提供自动化、高精度的猫品种识别解决方案，具有实际应用价值。实践全程注重团队协作，成员各司其职，组长协调并负责界面工作，共同推进项目进展，团队采用Python + PyTorch + PyQt5技术栈，结合多线程处理框架，实现了高效、稳定的猫种类识别应用。",
+            images: [
+                "assets/images/project3/image1.png",
+                "assets/images/project3/image2.png",
+                "assets/images/project3/image3.png"
+            ],
+            tags: ["YOLOv11", "目标检测", "PyQt5", "深度学习"],
+            video: "assets/videos/project3/video1.mp4"
+        },
+
+        project04: {
+            title: "人事管理系统",
+            description: "本项目致力于研发一套智能化、模块化的人事管理系统，旨在通过集成用户信息、员工信息、部门管理等核心人事管理功能于一体化的数字平台，实现人力资源数据的高效整合与流程自动化。系统以提升管理效率、优化员工体验、赋能决策分析为核心目标，通过标准化的流程设计和直观的数据看板，助力企业规范化人事运营，降低管理成本，并为人才战略规划提供精准的数据洞察与决策支持，从而推动组织向更敏捷、更人性化的现代管理模式转型。",
+            images: [
+                "assets/images/project4/image1.png",
+                "assets/images/project4/image2.png",
+                "assets/images/project4/image3.png"
+            ],
+            tags: ["数据可视化", "SSM框架", "Mysql"],
+            // video: "assets/videos/project4/video1.mp4"
+        },
+
+        project05: {
+            title: "The right path",
+            description: "本视频利用AI生成，构建了一位行者不断前行，旅途不断变化的怪诞世界。视频的主人公不断的在如梦般迷幻的道路中行走，寻找心中真正想要走的道路。",
+            images: [
+                "assets/images/project5/image1.png",
+                "assets/images/project5/image2.png",
+                "assets/images/project5/image3.png"
+            ],
+            tags: ["AIGC", "视频生成"],
+            video: "assets/videos/project5/video1.mp4"
+        },
+
+        project06: {
+            title: "个人作品集网站",
+            description: "响应式个人作品集网站，展示项目作品和个人技能。采用现代化的设计语言和交互效果，提供流畅的用户体验。",
+            images: [
+                "assets/images/project6/image1.png",
+                "assets/images/project6/image2.png",
+                "assets/images/project6/image3.png"
+            ],
+            tags: ["HTML5", "CSS3", "JavaScript", "响应式"],
+            video: "assets/videos/project6/video1.mp4"
+        }
+    };
+
+    // 获取URL参数
+    function getUrlParameter(name) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+        const results = regex.exec(window.location.search);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // 加载项目详情
+    function loadProjectDetail() {
+        const projectId = getUrlParameter('project');
+        const projectData = projectsData[projectId];
+        const contentDiv = document.getElementById('projectDetailContent');
+
+        if (!projectData) {
+            contentDiv.innerHTML = `
+                <div class="project-detail-header">
+                    <h1>项目未找到</h1>
+                    <p>抱歉，找不到您要查看的项目。</p>
+                    <a href="index.html#projects" class="back-button">
+                        <i class="fas fa-arrow-left"></i> 返回项目列表
+                    </a>
+                </div>
+            `;
+            return;
+        }
+
+        // 生成图片HTML
+        const imagesHTML = projectData.images.map(img => `
+            <img src="${img}" alt="${projectData.title} - 项目截图"
+                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x280/6c63ff/ffffff?text=项目截图'">
+        `).join('');
+
+        // 生成完整页面
+        contentDiv.innerHTML = `
+            <div class="project-detail-header">
+                <h1>${projectData.title}</h1>
+                <div class="project-tags">
+                    ${projectData.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                </div>
+                <p class="project-description">${projectData.description}</p>
+            </div>
+
+            <div class="project-gallery">
+                ${imagesHTML}
+            </div>
+
+            ${projectData.video ? `
+                <div class="video-button-container">
+                    <button class="video-button" onclick="playVideo('${projectData.video}', '${projectData.title}')">
+                        <i class="fas fa-play-circle"></i> 播放演示视频
+                    </button>
+                </div>
+            ` : ''}
+        `;
+    }
+
+    // 视频播放函数
+    function playVideo(videoSrc, title) {
+        // 检查是否已存在模态框，如果存在则移除
+        const existingModal = document.getElementById('videoModal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+
+        // 创建视频模态框
+        const videoModal = document.createElement('div');
+        videoModal.className = 'video-modal active';
+        videoModal.id = 'videoModal';
+        videoModal.innerHTML = `
+        <div class="video-modal-content">
+            <button class="video-close" onclick="closeVideo()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="video-container">
+                <video id="modalVideo" controls autoplay>
+                    <source src="${videoSrc}" type="video/mp4">
+                    您的浏览器不支持视频播放
+                </video>
+            </div>
+            <div class="video-info">
+                <h3>${title} - 演示视频</h3>
+                <p>点击视频任意位置可暂停/播放</p>
+            </div>
+        </div>
+    `;
+
+        // 添加模态框到页面
+        document.body.appendChild(videoModal);
+
+        // 防止页面滚动
+        document.body.style.overflow = 'hidden';
+
+        // 点击模态框外部关闭
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                closeVideo();
+            }
+        });
+
+        // ESC键关闭视频
+        document.addEventListener('keydown', function escHandler(e) {
+            if (e.key === 'Escape') {
+                closeVideo();
+                document.removeEventListener('keydown', escHandler);
+            }
+        });
+
+        // 获取视频元素并确保播放
+        const videoElement = document.getElementById('modalVideo');
+        if (videoElement) {
+            // 等待视频加载
+            videoElement.addEventListener('loadeddata', function() {
+                // 尝试播放视频
+                const playPromise = videoElement.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("自动播放被阻止，用户需要手动点击播放");
+                        // 显示播放按钮提示
+                        const videoContainer = document.querySelector('.video-container');
+                        const playOverlay = document.createElement('div');
+                        playOverlay.className = 'video-play-overlay';
+                        playOverlay.innerHTML = `
+                        <div style="text-align: center; color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            <i class="fas fa-play-circle" style="font-size: 3rem;"></i>
+                            <p>点击播放视频</p>
+                        </div>
+                    `;
+                        playOverlay.style.position = 'absolute';
+                        playOverlay.style.top = '0';
+                        playOverlay.style.left = '0';
+                        playOverlay.style.width = '100%';
+                        playOverlay.style.height = '100%';
+                        playOverlay.style.cursor = 'pointer';
+                        playOverlay.style.zIndex = '1';
+                        playOverlay.addEventListener('click', function() {
+                            videoElement.play();
+                            this.remove();
+                        });
+                        videoContainer.appendChild(playOverlay);
+                    });
+                }
+            });
+        }
+    }
+
+    // 关闭视频
+    function closeVideo() {
+        const modal = document.getElementById('videoModal');
+        if (modal) {
+            const video = document.getElementById('modalVideo');
+            if (video) {
+                video.pause();
+            }
+            modal.remove();
+        }
+    }
+
+    // 页面加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+        loadProjectDetail();
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // 导航菜单切换
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
+    });
+</script>
+</body>
+</html>
